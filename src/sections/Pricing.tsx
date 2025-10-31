@@ -66,17 +66,22 @@ export const Pricing = () => {
             exclusive features.
           </p>
         </div>
+
         <div className="flex flex-col gap-6 items-center mt-10 lg:flex-row lg:items-end lg:justify-center">
           {pricingTiers.map(
-            ({
-              title,
-              monthlyPrice,
-              buttonText,
-              popular,
-              inverse,
-              features,
-            }) => (
+            (
+              {
+                title,
+                monthlyPrice,
+                buttonText,
+                popular,
+                inverse,
+                features,
+              },
+              index
+            ) => (
               <div
+                key={index} // ✅ FIXED
                 className={twMerge(
                   "card",
                   inverse === true && "border-black bg-black text-white"
@@ -91,12 +96,11 @@ export const Pricing = () => {
                   >
                     {title}
                   </h3>
+
                   {popular === true && (
                     <div className="inline-flex text-sm px-4 py-1.5 rounded-xl border border-white/20">
                       <motion.span
-                        animate={{
-                          backgroundPositionX: "100%",
-                        }}
+                        animate={{ backgroundPositionX: "100%" }}
                         transition={{
                           duration: 1,
                           repeat: Infinity,
@@ -110,6 +114,7 @@ export const Pricing = () => {
                     </div>
                   )}
                 </div>
+
                 <div className="flex items-baseline gap-1 mt-[30px]">
                   <span className="text-4xl font-bold tracking-tighter leading-none">
                     ${monthlyPrice}
@@ -118,6 +123,7 @@ export const Pricing = () => {
                     /month
                   </span>
                 </div>
+
                 <button
                   className={twMerge(
                     "btn btn-primary w-full mt-[30px]",
@@ -126,9 +132,13 @@ export const Pricing = () => {
                 >
                   {buttonText}
                 </button>
+
                 <ul className="flex flex-col gap-5 mt-8">
-                  {features.map((feature) => (
-                    <li className="text-sm flex items-center gap-4">
+                  {features.map((feature, featureIndex) => (
+                    <li
+                      key={featureIndex} // ✅ FIXED
+                      className="text-sm flex items-center gap-4"
+                    >
                       <CheckIcon className="h-6 w-6" />
                       <span>{feature}</span>
                     </li>
