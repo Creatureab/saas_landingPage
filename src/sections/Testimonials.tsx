@@ -9,7 +9,6 @@ import avatar7 from "@/assets/avatar-7.png";
 import avatar8 from "@/assets/avatar-8.png";
 import avatar9 from "@/assets/avatar-9.png";
 import Image from "next/image";
-import { twMerge } from "tailwind-merge";
 import { motion } from "framer-motion";
 import React from "react";
 
@@ -21,7 +20,7 @@ const testimonials = [
     username: "@jamietechguru00",
   },
   {
-    text: "Our team's productivity has skyrocketed since we started using this tool. ",
+    text: "Our team's productivity has skyrocketed since we started using this tool.",
     imageSrc: avatar2.src,
     name: "Josh Smith",
     username: "@jjsmith",
@@ -39,7 +38,7 @@ const testimonials = [
     username: "@caseyj",
   },
   {
-    text: "Planning and executing events has never been easier. This app helps me keep track of all the moving parts, ensuring nothing slips through the cracks.",
+    text: "Planning and executing events has never been easier.",
     imageSrc: avatar5.src,
     name: "Taylor Kim",
     username: "@taylorkimm",
@@ -51,19 +50,19 @@ const testimonials = [
     username: "@rileysmith1",
   },
   {
-    text: "Adopting this app for our team has streamlined our project management and improved communication across the board.",
+    text: "Adopting this app for our team has streamlined project management.",
     imageSrc: avatar7.src,
     name: "Jordan Patels",
     username: "@jpatelsdesign",
   },
   {
-    text: "With this app, we can easily assign tasks, track progress, and manage documents all in one place.",
+    text: "We can easily assign tasks, track progress, and manage documents.",
     imageSrc: avatar8.src,
     name: "Sam Dawson",
     username: "@dawsontechtips",
   },
   {
-    text: "Its user-friendly interface and robust features support our diverse needs.",
+    text: "Its user-friendly interface supports our diverse needs.",
     imageSrc: avatar9.src,
     name: "Casey Harper",
     username: "@casey09",
@@ -81,9 +80,7 @@ const TestimonialsColumn = (props: {
 }) => (
   <div className={props.className}>
     <motion.div
-      animate={{
-        translateY: "-50%",
-      }}
+      animate={{ translateY: "-50%" }}
       transition={{
         duration: props.duration || 10,
         repeat: Infinity,
@@ -92,30 +89,34 @@ const TestimonialsColumn = (props: {
       }}
       className="flex flex-col gap-6 pb-6"
     >
-      {[...new Array(2)].fill(0).map((_, outerIndex) => (
+      {[...Array(2)].map((_, outerIndex) => (
         <React.Fragment key={outerIndex}>
           {props.testimonials.map(
             ({ text, imageSrc, name, username }, innerIndex) => (
-              <div key={innerIndex} className="card">
-                <div>{text}</div>
+              <React.Fragment key={innerIndex}>
+                <div className="card">
+                  <div>{text}</div>
 
-                <div className="flex items-center gap-2 mt-5">
-                  <Image
-                    src={imageSrc}
-                    alt={name}
-                    width={40}
-                    height={40}
-                    className="h-10 w-10 rounded-full"
-                  />
+                  <div className="flex items-center gap-2 mt-5">
+                    <Image
+                      src={imageSrc}
+                      alt={name}
+                      width={40}
+                      height={40}
+                      className="h-10 w-10 rounded-full"
+                    />
 
-                  <div className="flex flex-col">
-                    <div className="font-medium tracking-tight leading-5">
-                      {name}
+                    <div className="flex flex-col">
+                      <div className="font-medium tracking-tight leading-5">
+                        {name}
+                      </div>
+                      <div className="leading-5 tracking-tight">
+                        {username}
+                      </div>
                     </div>
-                    <div className="leading-5 tracking-tight">{username}</div>
                   </div>
                 </div>
-              </div>
+              </React.Fragment>
             )
           )}
         </React.Fragment>
